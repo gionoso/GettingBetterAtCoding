@@ -40,6 +40,16 @@ def display_scores(round_Count,player_score,computer_score,ties):
     print("Computer Score:", computer_score)
     print("Ties:", ties)
 
+#Function for playing again
+def play_again():
+    while True:
+        answer=input("Want to play again? Yes/No:").lower()
+        if answer=="yes":
+            return True
+        elif answer=="no":
+            return False
+        else:
+            print("Invalid input. Please enter 'yes' or 'no'.")
 
 #Initialize scores and rounds
 player_score = 0
@@ -70,13 +80,9 @@ while True:
     Scores=display_scores(round_Count,player_score,computer_score,ties)
     print(Scores)
     
-    answer=input("Want to play again? Yes/No:").lower()
-    if answer=="yes":
+    if play_again():
         continue
-    elif answer=="no":
-        print("Thanks for playing!!!")
-        exit()
     else:
-        print("Invalid input. Please enter 'yes' or 'no'.")
-
+       print("Thanks for playing")
+       break
 
