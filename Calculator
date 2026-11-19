@@ -1,4 +1,6 @@
 #This is a simple calculator that takes two inputs and performs calculations based on which operator is chosen
+
+#Function that performs calculations depending on which operation user chooses
 def calculator(number1,number2,operation):
     if operation=="+":
         return number1+number2
@@ -15,40 +17,49 @@ def calculator(number1,number2,operation):
     else:
         print("Invalid Response")
         return None
-    
-    
-    
 
+def get_number(prompt):
+    while True:
+        try:
+            return float(input(prompt))
+        except ValueError:
+            print("Invalid Input")
+
+    
+#Main calculator loop
 running=True
 while running:
+    result=get_number("Enter First Number: ")
     while True:
-        try:
-            number1=float(input("Enter First Number:"))
+        operation=input("Choose an operation (+,-,*,/) or enter 'done':" ).strip().lower()
+        if operation== "done":
             break
-        except ValueError:
-            print("Invalid Input")
-    while True:
-        try:
-            number2=float(input("Enter Second Number:"))
-            break
-        except ValueError:
-            print("Invalid Input")
+        if operation not in ("+","-","*","/"):
+            print("Invalid Response")
+            continue
 
-    operation=input("Choose an operation(+,-,*,/)")
-    result=calculator(number1,number2,operation)
-    if result is None:
-        continue
-    print("Result:",result)
-    
+        number=get_number("Enter Next Number")
+        new_result=calculator(result, number, operation)
+
+        if new_result is None:
+            continue
+
+        result=new_result
+        print("Running Total:",result)
+
+    print("Final Result:",result)
+
+
+    #Replayability loop that prompts user for yes and no and restarts question if user does not enter valid answer
     while True:
         again=input("Would You Like To Calculate Again? (Yes/No):").lower()
         if again=="yes":
             break
         elif again=="no":
             running=False
+            break
         else:
             print("Invalid Response. Please Try Again")
-            continue
 
 
 
