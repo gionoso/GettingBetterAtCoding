@@ -1,4 +1,4 @@
-#This is a simple calculator that takes two inputs and performs calculations based on which operator is chosen
+#Calculator that takes multiple inputs and performs calculations based on which operations user chooses.
 
 #Function that performs calculations depending on which operation user chooses
 def calculator(number1,number2,operation):
@@ -8,6 +8,10 @@ def calculator(number1,number2,operation):
        return number1-number2
     elif operation=="*":
         return number1*number2
+    elif operation=="%":
+        return number1%number2
+    elif operation=="**":
+        return number1**number2
     elif operation=="/":
         if number2==0:
             print("Undefined")
@@ -31,14 +35,14 @@ running=True
 while running:
     result=get_number("Enter First Number: ")
     while True:
-        operation=input("Choose an operation (+,-,*,/) or enter 'done':" ).strip().lower()
+        operation=input("Choose an operation (+,-,*,/,**,%) or enter 'done':" ).strip().lower()
         if operation== "done":
             break
-        if operation not in ("+","-","*","/"):
+        if operation not in ("+","-","*","/","**","%"):
             print("Invalid Response")
             continue
 
-        number=get_number("Enter Next Number")
+        number=get_number("Enter Next Number: ")
         new_result=calculator(result, number, operation)
 
         if new_result is None:
@@ -52,7 +56,7 @@ while running:
 
     #Replayability loop that prompts user for yes and no and restarts question if user does not enter valid answer
     while True:
-        again=input("Would You Like To Calculate Again? (Yes/No):").lower()
+        again=input("Would You Like To Calculate Again? (Yes/No):").split().lower()
         if again=="yes":
             break
         elif again=="no":
